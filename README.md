@@ -14,6 +14,11 @@ No hosted-API dependency, nothing to break in the demo.
 
 ## The pipeline
 
+![ve-skills workflow](docs/workflow.svg)
+
+<details>
+<summary>Same thing as text</summary>
+
 ```
 challenge1 VCF (68, b37) ─┐
 outside demo sets ────────┤
@@ -40,6 +45,8 @@ outside demo sets ────────┤
                  └──────┬───────┘
               ranked list + abstention list
 ```
+
+</details>
 
 Record counts are what the **challenge pack actually produces**. The two zero-count
 branches are demoed on outside public data (ClinVar, gnomAD), which the challenge rules
