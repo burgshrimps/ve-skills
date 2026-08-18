@@ -1,0 +1,418 @@
+<title>POLR3C Splice Delta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+  :root {
+    --ground:      #F5F7F9;
+    --surface:     #FFFFFF;
+    --ink:         #101720;
+    --ink-2:       #4A5766;
+    --ink-3:       #79879A;
+    --rule:        #D8E0E8;
+    --accent:      #1F4E79;
+    --accent-soft: #E3EDF6;
+    --loss:        #B0332A;
+    --loss-soft:   #F8E5E2;
+    --gain:        #1C7048;
+    --display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0B1015;
+      --surface:     #141C25;
+      --ink:         #E9EEF3;
+      --ink-2:       #9AA9B8;
+      --ink-3:       #6B7C8D;
+      --rule:        #253340;
+      --accent:      #82B4E6;
+      --accent-soft: #16293C;
+      --loss:        #EC8175;
+      --loss-soft:   #351D1A;
+      --gain:        #63C494;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0B1015;
+    --surface:     #141C25;
+    --ink:         #E9EEF3;
+    --ink-2:       #9AA9B8;
+    --ink-3:       #6B7C8D;
+    --rule:        #253340;
+    --accent:      #82B4E6;
+    --accent-soft: #16293C;
+    --loss:        #EC8175;
+    --loss-soft:   #351D1A;
+    --gain:        #63C494;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--display);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2vmin;
+  }
+
+  .slide {
+    width: min(100%, calc((100vh - 4vmin) * 16 / 9));
+    aspect-ratio: 16 / 9;
+    container-type: inline-size;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---------- header ---------- */
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2cqw;
+    padding: 3cqw 3.4cqw 0;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 1.15cqw;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    margin: .5cqw 0 0;
+    font-size: 3.1cqw;
+    font-weight: 800;
+    letter-spacing: -.022em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+  .locus {
+    font-family: var(--mono);
+    font-size: 1.25cqw;
+    color: var(--ink-2);
+    text-align: right;
+    line-height: 1.7;
+    white-space: nowrap;
+  }
+  .locus b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- body grid ---------- */
+  .body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 27% 1fr;
+    gap: 3cqw;
+    padding: 2.4cqw 3.4cqw 0;
+    min-height: 0;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 1.02cqw;
+    font-weight: 500;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  /* ---------- left rail ---------- */
+  .rail { display: flex; flex-direction: column; gap: 1.1cqw; }
+  .rail p {
+    margin: 0;
+    font-size: 1.18cqw;
+    line-height: 1.5;
+    color: var(--ink-2);
+    max-width: 34ch;
+  }
+
+  .stamps { display: flex; flex-wrap: wrap; gap: .34cqw; }
+  .stamp {
+    font-family: var(--mono);
+    font-size: .82cqw;
+    font-weight: 700;
+    letter-spacing: .06em;
+    padding: .34cqw .5cqw;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 2px;
+  }
+  .stamp.here { background: var(--loss-soft); color: var(--loss); }
+
+  .split { display: flex; flex-direction: column; gap: .42cqw; }
+  .bar {
+    display: grid;
+    grid-template-columns: 2.6cqw 1fr;
+    align-items: center;
+    gap: .7cqw;
+    font-family: var(--mono);
+    font-size: 1.02cqw;
+    color: var(--ink-2);
+  }
+  .bar i {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--ink);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar span { display: flex; align-items: center; gap: .5cqw; }
+  .bar u {
+    display: block;
+    height: .62cqw;
+    background: var(--ink-3);
+    border-radius: 1px;
+  }
+  .bar.w u { background: var(--loss); }
+  .bar.s u { background: var(--gain); }
+  .bar.a u { background: var(--rule); }
+
+  /* ---------- sequence stage ---------- */
+  .stage { display: flex; flex-direction: column; gap: 1cqw; min-width: 0; }
+
+  .orient {
+    font-family: var(--mono);
+    font-size: 1.02cqw;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .orient b { color: var(--ink); font-weight: 700; }
+
+  .seqblock {
+    display: grid;
+    grid-template-columns: 4.6cqw 1fr auto;
+    align-items: center;
+    gap: 1.4cqw;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 1.05cqw;
+    font-weight: 700;
+    letter-spacing: .1em;
+    color: var(--ink-3);
+  }
+
+  .bases { display: flex; align-items: stretch; gap: .45cqw; }
+  .grp { display: flex; gap: .45cqw; }
+  .bases b {
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 3.2cqw;
+    line-height: 1;
+    width: 3.05cqw;
+    padding: .55cqw 0;
+    text-align: center;
+    color: var(--ink);
+    border: 1.5px solid transparent;
+    border-radius: 3px;
+  }
+  .bases b.dim { color: var(--ink-3); }
+  .bases b.anchor {
+    background: var(--accent-soft);
+    border-color: color-mix(in srgb, var(--accent) 32%, transparent);
+    color: var(--accent);
+  }
+  .bases b.changed {
+    background: var(--loss-soft);
+    border-color: var(--loss);
+    color: var(--loss);
+  }
+
+  .cut {
+    width: 0;
+    border-left: 2px dashed var(--ink-3);
+    margin: 0 .55cqw;
+  }
+
+  .mes {
+    font-family: var(--mono);
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .mes strong { display: block; font-size: 2.5cqw; font-weight: 700; line-height: 1; }
+  .mes em {
+    display: block;
+    font-style: normal;
+    font-size: .92cqw;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-top: .3cqw;
+  }
+  .mes.after strong { color: var(--loss); }
+
+  /* label row aligned to the base groups: 3 bases + 2 gaps, then the cut rule */
+  .cutkey {
+    display: grid;
+    grid-template-columns: 4.6cqw 1fr;
+    gap: 1.4cqw;
+    font-family: var(--mono);
+    font-size: .92cqw;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cutkey .row { display: flex; }
+  .cutkey .e { width: 10.05cqw; }
+  .cutkey .i { margin-left: 1.2cqw; }
+
+  .delta {
+    display: flex;
+    align-items: baseline;
+    gap: 1.1cqw;
+    padding: .9cqw 1.4cqw;
+    background: var(--loss-soft);
+    border-left: 3px solid var(--loss);
+  }
+  .delta strong {
+    font-family: var(--mono);
+    font-size: 3.4cqw;
+    font-weight: 700;
+    color: var(--loss);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .delta span { font-size: 1.15cqw; color: var(--ink-2); line-height: 1.45; }
+  .delta span b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- footer ---------- */
+  .foot {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 1.15fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .cell {
+    padding: 1.5cqw 1.6cqw 1.7cqw;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: .45cqw;
+  }
+  .cell:first-child { padding-left: 3.4cqw; }
+  .cell:last-child { border-right: 0; padding-right: 3.4cqw; background: var(--accent-soft); }
+  .cell p { margin: 0; font-size: 1.06cqw; line-height: 1.45; color: var(--ink-2); }
+  .cell p b { color: var(--ink); font-weight: 600; }
+  .cell .k {
+    font-family: var(--mono);
+    font-size: .92cqw;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cell:last-child .k { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="slide">
+
+  <header class="head">
+    <div>
+      <div class="eyebrow">ve-splice &nbsp;/&nbsp; ref-vs-alt splice delta</div>
+      <h1>One HIGH label, actually measured</h1>
+    </div>
+    <div class="locus">
+      <b>POLR3C</b> &nbsp;NM_006468.6 &nbsp;exon 5 donor<br>
+      <b>1:145606274 C&gt;T</b> &nbsp;GRCh37 &nbsp;paternal
+    </div>
+  </header>
+
+  <div class="body">
+
+    <aside class="rail">
+      <div class="label">What the annotation gave us</div>
+      <div class="stamps">
+        <span class="stamp here">HIGH</span><span class="stamp">HIGH</span><span class="stamp">HIGH</span>
+        <span class="stamp">HIGH</span><span class="stamp">HIGH</span><span class="stamp">HIGH</span>
+        <span class="stamp">HIGH</span><span class="stamp">HIGH</span><span class="stamp">HIGH</span>
+        <span class="stamp">HIGH</span><span class="stamp">HIGH</span><span class="stamp">HIGH</span>
+      </div>
+      <p>SnpEff stamps all twelve splice-site variants the same. Nothing downstream can
+         rank them, because the label carries no magnitude.</p>
+
+      <div class="label" style="margin-top:.5cqw">What ve-splice returns</div>
+      <div class="split">
+        <div class="bar w"><i>7</i><span><u style="width:58%"></u>weakened</span></div>
+        <div class="bar s"><i>1</i><span><u style="width:9%"></u>strengthened</span></div>
+        <div class="bar a"><i>3</i><span><u style="width:25%"></u>negligible</span></div>
+        <div class="bar a"><i>1</i><span><u style="width:9%"></u>abstained</span></div>
+      </div>
+    </aside>
+
+    <section class="stage">
+      <p class="orient">POLR3C reads on the <b>&minus; strand</b> &mdash; inferred from the sequence,
+        not from a lookup. In gene orientation the VCF's C&gt;T is a <b>G&gt;A</b>, and it lands on
+        the first base of the donor <b>GT</b>.</p>
+
+      <div class="seqblock">
+        <div class="tag">REF</div>
+        <div class="bases">
+          <div class="grp"><b class="dim">G</b><b class="dim">A</b><b class="dim">G</b></div>
+          <div class="cut"></div>
+          <div class="grp"><b class="anchor">G</b><b class="anchor">T</b><b class="dim">A</b><b class="dim">A</b><b class="dim">T</b><b class="dim">G</b></div>
+        </div>
+        <div class="mes"><strong>8.73</strong><em>bits</em></div>
+      </div>
+
+      <div class="seqblock">
+        <div class="tag">ALT</div>
+        <div class="bases">
+          <div class="grp"><b class="dim">G</b><b class="dim">A</b><b class="dim">G</b></div>
+          <div class="cut"></div>
+          <div class="grp"><b class="changed">A</b><b class="anchor">T</b><b class="dim">A</b><b class="dim">A</b><b class="dim">T</b><b class="dim">G</b></div>
+        </div>
+        <div class="mes after"><strong>0.55</strong><em>bits</em></div>
+      </div>
+
+      <div class="cutkey"><div></div><div class="row"><span class="e">exon</span><span class="i">intron</span></div></div>
+
+      <div class="delta">
+        <strong>&minus;8.18</strong>
+        <span>bits of splice-site strength lost &mdash; a <b>94% drop</b>.<br>
+          The canonical <b>GT</b> becomes <b>AT</b>: the cell's cut signal is gone.</span>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <div class="cell">
+      <div class="k">Model</div>
+      <p><b>MaxEntScan</b>, Yeo &amp; Burge 2004. Our own port &mdash; reproduces all six
+         published reference values exactly.</p>
+    </div>
+    <div class="cell">
+      <div class="k">Strand check</div>
+      <p>Inferred from sequence for all 11 scorable loci, <b>correct 11/11</b> against
+         Ensembl &mdash; including five minus-strand genes.</p>
+    </div>
+    <div class="cell">
+      <div class="k">Cross-check</div>
+      <p>SpliceAI scores this <b>0.99</b>. Run offline as ground truth only &mdash; its
+         licence forbids shipping it. <b>9/11 agree.</b></p>
+    </div>
+    <div class="cell">
+      <div class="k">What this is not</div>
+      <p>A change in <b>motif strength</b>, not an observation of splicing. There is no RNA
+         in this data to test it against.</p>
+    </div>
+  </footer>
+
+</div>
