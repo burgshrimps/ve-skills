@@ -53,7 +53,7 @@ flag for genes with historical HIGH-effect annotations from both parental sides.
 ## CLI
 
 ```bash
-python ve_segregation.py \
+python skills/ve-segregation/ve_segregation.py \
   --input .inputs/challenge1-b37-segregation.vcf.gz \
   --output .outputs/ve_segregation_run \
   --case-sample ISDBM322015 \
