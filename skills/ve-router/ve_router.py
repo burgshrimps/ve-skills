@@ -224,9 +224,21 @@ def _open_text(path: Path):
     opener = gzip.open if magic == b"\x1f\x8b" else open
     return opener(path, "rt", encoding="utf-8", errors="replace")
 
+def _read_text(path: Path, limit: int | None = None) -> str:
+    """Read the input, converting decompression/IO failures into ValueError.
+
+    A truncated or corrupt .gz raises EOFError/BadGzipFile from deep inside the
+    gzip module. Those must surface as ValueError so main() reports them as bad
+    input (exit 2) rather than crashing with a traceback.
+    """
+    try:
+        with _open_text(path) as fh:
+            return fh.read(limit) if limit is not None else fh.read()
+    except (OSError, EOFError, UnicodeDecodeError) as exc:
+        raise ValueError(f"Could not read {path.name}: {exc}") from exc
+
 def _load_vcf(path: Path, assembly_flag: str | None) -> list[tuple[dict, dict, str | None]]:
-    with _open_text(path) as fh:
-        lines = fh.readlines()
+    lines = _read_text(path).splitlines(keepends=True)
     header_lines = [line for line in lines if line.startswith("##")]
     column_lines = [line for line in lines if line.startswith("#CHROM")]
     if not column_lines:
@@ -247,6 +259,8 @@ def _load_vcf(path: Path, assembly_flag: str | None) -> list[tuple[dict, dict, s
             gt_idx = fmt_keys.index("GT") if "GT" in fmt_keys else 0
             for sample, sample_field in zip(samples, fields[9:]):
                 genotypes[sample] = sample_field.split(":")[gt_idx]
+        if not pos.isdigit():
+            raise ValueError(f"Malformed VCF data line (POS is not an integer): {line[:80]!r}")
         variant = {"variant_key": f"{chrom}:{pos}:{ref}:{alt}", "chrom": chrom, "pos": int(pos),
                    "ref": ref, "alt": alt, "id": None if vid == "." else vid, "genotypes": genotypes}
         records.append((variant, _parse_info(info_str), build))
@@ -277,8 +291,7 @@ def _load_json(path: Path) -> list[tuple[dict, dict, str | None]]:
 def load_variants(path: Path, assembly_flag: str | None) -> list[tuple[dict, dict, str | None]]:
     if not path.exists():
         raise ValueError(f"Input file not found: {path}")
-    with _open_text(path) as fh:
-        head = fh.read(4096)
+    head = _read_text(path, 4096)
     stripped = head.lstrip()
     if stripped.startswith("##fileformat=VCF") or "\n#CHROM\t" in head or head.startswith("#CHROM\t"):
         return _load_vcf(path, assembly_flag)

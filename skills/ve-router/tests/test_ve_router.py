@@ -170,3 +170,43 @@ def test_demo_covers_all_five_classes_and_annotation_formats():
     both_splice = by_key["1:156354347:TC:T"]
     assert both_splice["class"] == "splice"
     assert both_splice["consequence"] == "SPLICE_SITE_ACCEPTOR"
+
+
+# --- corrupt input must not crash --------------------------------------
+
+def test_truncated_gzip_exits_2_without_traceback(tmp_path):
+    """A truncated .gz raises EOFError from inside gzip; it must surface as
+    bad input (exit 2), not as an unhandled traceback."""
+    bad = tmp_path / "truncated.vcf.gz"
+    bad.write_bytes(CHALLENGE_VCF.read_bytes()[:200])
+    completed = subprocess.run(
+        [sys.executable, str(MODULE_PATH), "--input", str(bad), "--output", str(tmp_path / "o")],
+        capture_output=True, text=True, check=False)
+    assert completed.returncode == 2
+    assert "ERROR:" in completed.stderr
+    assert "Traceback" not in completed.stderr
+
+
+def test_non_integer_pos_reports_domain_error(tmp_path):
+    bad = tmp_path / "badpos.vcf"
+    bad.write_text("##fileformat=VCFv4.1\n"
+                   "#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\n"
+                   "1\tNOTANUMBER\t.\tA\tG\t.\tPASS\tEFF=STOP_GAINED(HIGH||||||||||)\n",
+                   encoding="utf-8")
+    completed = subprocess.run(
+        [sys.executable, str(MODULE_PATH), "--input", str(bad), "--output", str(tmp_path / "o")],
+        capture_output=True, text=True, check=False)
+    assert completed.returncode == 2
+    assert "POS is not an integer" in completed.stderr
+    assert "Traceback" not in completed.stderr
+
+
+def test_no_banned_interpretive_words_in_outputs(tmp_path):
+    """Regression guard: the router reports routing decisions, never clinical claims."""
+    out = tmp_path / "o"
+    subprocess.run([sys.executable, str(MODULE_PATH), "--demo", "--output", str(out)],
+                   capture_output=True, text=True, check=True)
+    blob = ((out / "report.md").read_text(encoding="utf-8")
+            + (out / "result.json").read_text(encoding="utf-8")).lower()
+    for word in ("pathogenic", "diagnostic", "de novo", "compound heterozygous"):
+        assert word not in blob, f"banned interpretive word present in output: {word}"
