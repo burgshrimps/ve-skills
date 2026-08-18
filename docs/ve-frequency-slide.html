@@ -1,0 +1,424 @@
+<title>The AF That Isn't</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+  :root {
+    --ground:      #F5F7F9;
+    --surface:     #FFFFFF;
+    --ink:         #101720;
+    --ink-2:       #4A5766;
+    --ink-3:       #79879A;
+    --rule:        #D8E0E8;
+    --accent:      #1F4E79;
+    --accent-soft: #E3EDF6;
+    --loss:        #B0332A;
+    --loss-soft:   #F8E5E2;
+    --gain:        #1C7048;
+    --gain-soft:   #E2F0E9;
+    --display: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0B1015;
+      --surface:     #141C25;
+      --ink:         #E9EEF3;
+      --ink-2:       #9AA9B8;
+      --ink-3:       #6B7C8D;
+      --rule:        #253340;
+      --accent:      #82B4E6;
+      --accent-soft: #16293C;
+      --loss:        #EC8175;
+      --loss-soft:   #351D1A;
+      --gain:        #63C494;
+      --gain-soft:   #16301F;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0B1015;
+    --surface:     #141C25;
+    --ink:         #E9EEF3;
+    --ink-2:       #9AA9B8;
+    --ink-3:       #6B7C8D;
+    --rule:        #253340;
+    --accent:      #82B4E6;
+    --accent-soft: #16293C;
+    --loss:        #EC8175;
+    --loss-soft:   #351D1A;
+    --gain:        #63C494;
+    --gain-soft:   #16301F;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--display);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2vmin;
+  }
+
+  .slide {
+    width: min(100%, calc((100vh - 4vmin) * 16 / 9));
+    aspect-ratio: 16 / 9;
+    container-type: inline-size;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ---------- header ---------- */
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2cqw;
+    padding: 3cqw 3.4cqw 0;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 1.15cqw;
+    font-weight: 500;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    margin: .5cqw 0 0;
+    font-size: 3.1cqw;
+    font-weight: 800;
+    letter-spacing: -.022em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+  .locus {
+    font-family: var(--mono);
+    font-size: 1.25cqw;
+    color: var(--ink-2);
+    text-align: right;
+    line-height: 1.7;
+    white-space: nowrap;
+  }
+  .locus b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- body grid ---------- */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 1.42fr;
+    gap: 2.6cqw;
+    padding: 2.2cqw 3.4cqw 2.4cqw;
+    flex: 1;
+    min-height: 0;
+  }
+  .label {
+    font-family: var(--mono);
+    font-size: .95cqw;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: .8cqw;
+  }
+
+  /* ---------- left rail: the file's own INFO ---------- */
+  .infoline {
+    font-family: var(--mono);
+    font-size: 1.12cqw;
+    line-height: 1.9;
+    color: var(--ink-2);
+    background: var(--ground);
+    border: 1px solid var(--rule);
+    border-radius: .35cqw;
+    padding: 1cqw 1.2cqw;
+    word-break: break-all;
+  }
+  .infoline .hot { color: var(--loss); font-weight: 700; background: var(--loss-soft); padding: 0 .25cqw; }
+  .infoline .none { color: var(--ink-3); }
+
+  .absent {
+    margin-top: 1.2cqw;
+    font-size: 1.06cqw;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .absent b { color: var(--ink); font-weight: 600; }
+  .keys {
+    font-family: var(--mono);
+    font-size: 1cqw;
+    color: var(--ink-3);
+    margin-top: .5cqw;
+    line-height: 1.7;
+  }
+  .keys s { text-decoration-color: var(--loss); text-decoration-thickness: .12cqw; }
+
+  /* ---------- the arithmetic ---------- */
+  .floor {
+    margin-top: 1.4cqw;
+    border: 1px solid var(--rule);
+    border-left: .35cqw solid var(--loss);
+    border-radius: .35cqw;
+    padding: 1.1cqw 1.3cqw;
+    background: var(--surface);
+  }
+  .floor .sum {
+    font-family: var(--mono);
+    font-size: 1.15cqw;
+    color: var(--ink-2);
+    line-height: 1.8;
+  }
+  .floor .sum b { color: var(--ink); }
+  .floor .big {
+    display: flex;
+    align-items: baseline;
+    gap: .6cqw;
+    margin-top: .7cqw;
+  }
+  .floor .big strong {
+    font-size: 3.4cqw;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    color: var(--loss);
+    line-height: 1;
+  }
+  .floor .big em {
+    font-style: normal;
+    font-size: 1.02cqw;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+
+  /* ---------- right stage: threshold ladder ---------- */
+  .stage { display: flex; flex-direction: column; min-height: 0; }
+
+  .ladder {
+    display: flex;
+    flex-direction: column;
+    gap: .55cqw;
+    margin-bottom: 1.3cqw;
+  }
+  .rung {
+    display: grid;
+    grid-template-columns: 8.4cqw 1fr auto;
+    align-items: center;
+    gap: 1cqw;
+    font-family: var(--mono);
+    font-size: 1.06cqw;
+  }
+  .rung .name { color: var(--ink-2); }
+  .rung .track {
+    position: relative;
+    height: 1.5cqw;
+    background: var(--ground);
+    border: 1px solid var(--rule);
+    border-radius: .2cqw;
+  }
+  .rung .track u {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--accent-soft);
+    border-right: .12cqw solid var(--accent);
+    display: block;
+  }
+  .rung .verdict { color: var(--ink-3); font-size: .98cqw; white-space: nowrap; }
+
+  .rung.data .track u { background: var(--loss-soft); border-right-color: var(--loss); }
+  .rung.data .name { color: var(--ink); font-weight: 700; }
+  .rung.data .verdict { color: var(--loss); font-weight: 700; }
+
+  .verdictline {
+    font-size: 1.28cqw;
+    line-height: 1.5;
+    color: var(--ink-2);
+    padding-top: 1.2cqw;
+    border-top: 1px solid var(--rule);
+  }
+  .verdictline b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- outcome strip ---------- */
+  .outcome {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2cqw;
+    margin-top: 1.3cqw;
+  }
+  .card {
+    border: 1px solid var(--rule);
+    border-radius: .35cqw;
+    padding: 1cqw 1.2cqw;
+  }
+  .card.bad { background: var(--loss-soft); border-color: transparent; }
+  .card.good { background: var(--gain-soft); border-color: transparent; }
+  .card .k {
+    font-family: var(--mono);
+    font-size: .9cqw;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .card.bad .k { color: var(--loss); }
+  .card.good .k { color: var(--gain); }
+  .card .v {
+    font-size: 2.3cqw;
+    font-weight: 800;
+    letter-spacing: -.025em;
+    margin: .25cqw 0 .2cqw;
+    line-height: 1;
+  }
+  .card.bad .v { color: var(--loss); }
+  .card.good .v { color: var(--gain); }
+  .card p { margin: 0; font-size: 1cqw; line-height: 1.45; color: var(--ink-2); }
+  .card p b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- footer ---------- */
+  .foot {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 1.15fr;
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .cell {
+    padding: 1.5cqw 1.6cqw 1.7cqw;
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: .45cqw;
+  }
+  .cell:first-child { padding-left: 3.4cqw; }
+  .cell:last-child { border-right: 0; padding-right: 3.4cqw; background: var(--accent-soft); }
+  .cell p { margin: 0; font-size: 1.06cqw; line-height: 1.45; color: var(--ink-2); }
+  .cell p b { color: var(--ink); font-weight: 600; }
+  .cell .k {
+    font-family: var(--mono);
+    font-size: .92cqw;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .cell:last-child .k { color: var(--accent); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="slide">
+
+  <header class="head">
+    <div>
+      <div class="eyebrow">ve-frequency &nbsp;/&nbsp; frequency provenance gate</div>
+      <h1>The AF in the file is not a population frequency</h1>
+    </div>
+    <div class="locus">
+      <b>challenge1-b37</b> &nbsp;68 records &nbsp;GRCh37<br>
+      <b>4 samples</b> &nbsp;one family &nbsp;AN&nbsp;=&nbsp;8
+    </div>
+  </header>
+
+  <div class="body">
+
+    <aside class="rail">
+      <div class="label">What the VCF actually offers</div>
+      <div class="infoline">
+        AC=2;<span class="hot">AF=0.250</span>;AN=8;MLEAC=2;<span class="hot">MLEAF=0.250</span>;DP=120;EFF=&hellip;;VQSLOD=4.11
+      </div>
+
+      <p class="absent">That <b>AF</b> is GATK <b>cohort</b> allele frequency &mdash; two of the
+        eight alleles <em>in this family</em>. Not two-and-a-half percent of humans.</p>
+
+      <div class="keys">population keys present:<br>
+        <s>AF_TGP</s> &nbsp;<s>AF_EXAC</s> &nbsp;<s>AF_ESP</s> &nbsp;<s>gnomAD_AF</s><br>
+        <span class="none">&mdash; zero occurrences, all 68 records</span>
+      </div>
+
+      <div class="floor">
+        <div class="sum">4 diploid samples &rarr; <b>AN = 8</b><br>
+          smallest possible non-zero AF = <b>1 / 8</b></div>
+        <div class="big">
+          <strong>12.5%</strong>
+          <em>is the <b>floor</b>. No variant in this<br>file can have a smaller AF.</em>
+        </div>
+      </div>
+    </aside>
+
+    <section class="stage">
+      <div class="label">Every rarity threshold sits below that floor</div>
+
+      <div class="ladder">
+        <div class="rung">
+          <span class="name">0.1%</span>
+          <span class="track"><u style="width:0.8%"></u></span>
+          <span class="verdict">strict dominant</span>
+        </div>
+        <div class="rung">
+          <span class="name">1%</span>
+          <span class="track"><u style="width:8%"></u></span>
+          <span class="verdict">standard rare-disease cut</span>
+        </div>
+        <div class="rung">
+          <span class="name">5%</span>
+          <span class="track"><u style="width:40%"></u></span>
+          <span class="verdict">ACMG BA1 stand-alone benign</span>
+        </div>
+        <div class="rung data">
+          <span class="name">12.5%</span>
+          <span class="track"><u style="width:100%"></u></span>
+          <span class="verdict">&larr; the file's own minimum</span>
+        </div>
+      </div>
+
+      <p class="verdictline">Read <b>INFO/AF</b> as population frequency and <b>every one of the
+        68 variants scores as common</b> &mdash; including all 68 that segregate with the disease.
+        The filter does not merely fail. It <b>inverts</b>: the more relatives carry a variant,
+        the more common it looks, and the faster it is discarded.</p>
+
+      <div class="outcome">
+        <div class="card bad">
+          <div class="k">Naive AF filter</div>
+          <div class="v">68 / 68</div>
+          <p>discarded as <b>common</b>. Silently. No error, no warning, an empty shortlist
+            that looks like a clean result.</p>
+        </div>
+        <div class="card good">
+          <div class="k">ve-frequency</div>
+          <div class="v">68 &rarr; NO_DATA</div>
+          <p>refused, each with a named reason: <b>cohort AF, not population AF</b>.
+            The abstention travels downstream as data.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <div class="cell">
+      <div class="k">Build</div>
+      <p>Read from <b>##reference</b> and contig lengths, never assumed. Our data is
+        <b>b37</b>; gnomAD v4 is GRCh38-only. Unknown build &rarr; NO_DATA.</p>
+    </div>
+    <div class="cell">
+      <div class="k">Liftover</div>
+      <p>Vendored <b>285 KB</b> Ensembl chain, stdlib only. <b>4/4</b> against Ensembl REST
+        and gnomAD's own liftover. 32.5% of blocks are minus-strand.</p>
+    </div>
+    <div class="cell">
+      <div class="k">Absence &ne; rarity</div>
+      <p>Not-found at a covered site is bounded by <b>~3/AN</b>. Not-found at an
+        uncovered site is <b>NO_DATA</b>, never rare.</p>
+    </div>
+    <div class="cell">
+      <div class="k">What this is not</div>
+      <p>Not an annotator, and not a pathogenicity call. It decides only whether a
+        frequency question <b>can honestly be answered</b>.</p>
+    </div>
+  </footer>
+</div>
