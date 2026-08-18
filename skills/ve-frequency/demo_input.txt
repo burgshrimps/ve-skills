@@ -1,0 +1,18 @@
+##fileformat=VCFv4.1
+##reference=file:///data/human_g1k_v37.fasta
+##contig=<ID=1,length=249250621>
+##contig=<ID=13,length=115169878>
+##contig=<ID=17,length=81195210>
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes">
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency, for each ALT allele, in the same order as listed">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=MLEAF,Number=A,Type=Float,Description="Maximum likelihood expectation for the allele frequency">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	ISDBM322015	ISDBM322016	ISDBM322017	ISDBM322018
+1	11906068	rs5065	A	G	99	PASS	AC=2;AF=0.250;AN=8;MLEAF=0.250;DP=120	GT	0/1	0/1	0/0	0/0
+1	55505647	.	G	T	99	PASS	AC=1;AF=0.125;AN=8;MLEAF=0.125;DP=98	GT	0/1	0/0	0/0	0/1
+17	41246481	.	T	C	99	PASS	AC=2;AF=0.250;AN=8;MLEAF=0.250;DP=110	GT	0/1	0/1	0/0	0/0
+13	32906729	.	G	A	99	PASS	AC=1;AF=0.125;AN=8;MLEAF=0.125;DP=87	GT	0/1	0/0	0/1	0/0
+1	11906069	rsDEMO	C	T	99	PASS	AC=1;AF=0.125;AN=8;gnomAD_AF=0.0004;DP=101	GT	0/1	0/0	0/0	0/1
+1	11906070	rsDEMO2	G	A	99	PASS	AC=4;AF=0.500;AN=8;gnomAD_AF=0.31;DP=95	GT	0/1	0/1	0/1	0/1
