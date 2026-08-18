@@ -53,12 +53,6 @@ outside demo sets ────────┤
 
 ---
 
-## What the skills measure
-
-Each skill turns a label that carries no magnitude into something measured, or refuses the
-question. Full slides: [`ve-frequency`](docs/ve-frequency-slide.html) ·
-[`ve-splice`](docs/ve-splice-slide.html)
-
 ### `ve-frequency` — the AF in the file is not a population frequency
 
 The VCF offers exactly one frequency field, and it is a trap:
