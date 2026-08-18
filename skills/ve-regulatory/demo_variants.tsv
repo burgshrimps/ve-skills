@@ -1,0 +1,5 @@
+chrom	pos	ref	alt	id	build	class	gene	confirmed_model
+1	109274968	G	T	rs12740374	hg38	non_coding	SORT1	ENCSR562FNN
+16	53767042	T	C	rs1421085	hg38	non_coding	FTO_IRX3	ENCSR540BML
+8	127401060	G	T	rs6983267	hg38	non_coding	8q24_MYC_enhancer	ENCSR994KTY
+2	135851076	G	A	rs4988235	hg38	non_coding	LCT	ENCSR133KBX

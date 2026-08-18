@@ -1,0 +1,162 @@
+{
+ "provenance": {
+  "generated": "2026-08-18",
+  "how": "Real live run: python3 ve_regulatory.py --input demo_variants.tsv --output <dir> against a working venv (torch 2.13.0, cherimoya 0.2.0, tangermeme 1.4.1, bpnet-lite 1.0.0, huggingface_hub 1.28.0) on Python 3.13.12, Apple Silicon (arm64), CPU inference (device='cpu', compile=False). Checkpoints and CATv1-metadata.tsv/performance.tsv pulled live from the programmable-genomics/CATv1 Hugging Face Hub repo; hg38 windows pulled live from the Ensembl REST sequence API (rest.ensembl.org).",
+  "not_fabricated": "Every number in `records` below is copied verbatim from that run's result.json; none were hand-edited or estimated.",
+  "reproduce": "python3 skills/ve-regulatory/ve_regulatory.py --input skills/ve-regulatory/demo_variants.tsv --output /tmp/ve_regulatory_demo_live"
+ },
+ "records": [
+  {
+   "skill": "ve-regulatory",
+   "variant_key": "1:109274968:G:T",
+   "score": 0.7531,
+   "direction": "increases",
+   "confidence": "high",
+   "in_domain": true,
+   "abstain_reason": null,
+   "evidence": {
+    "confirmed_model": "ENCSR562FNN",
+    "fold": 0,
+    "count_pearson_fold0": 0.8888939023017883,
+    "model_selection": "accession supplied by the caller; ve-regulatory cannot verify that a --propose shortlist was produced or reviewed by a human",
+    "window": "1:109273911-109276024 (hg38)",
+    "predicted_accessibility": {
+     "ref_log_count": 5.8979,
+     "alt_log_count": 6.651
+    },
+    "magnitude_uncalibrated": {
+     "delta_log_count": 0.7531,
+     "fold_change_approx": 2.127
+    },
+    "contribution_delta": {
+     "ref_attribution_at_variant": -0.22703,
+     "alt_attribution_at_variant": 0.5261,
+     "delta": 0.75313,
+     "window_bp": 51
+    },
+    "tf_binding_high_attribution_motif_like_position": true,
+    "notes": [
+     "predicted_accessibility is CATv1's own model output: a continuous score, not a called ATAC/DNase peak; ENCODE peak BEDs were not consulted.",
+     "magnitude_uncalibrated is UNCALIBRATED: a published evaluation of this model class found predicted fold-changes fall roughly an order of magnitude below measured ones (rs12740374/SORT1: ~12-fold measured). Treat only direction as informative.",
+     "contribution_delta is native tangermeme.saturation_mutagenesis attribution on the log-count head -- the one number here with no interpretive layer added.",
+     "tf_binding flags a high-attribution, motif-like position only. CATv1 gives no TF identity; no transcription factor is ever named."
+    ],
+    "flags": []
+   }
+  },
+  {
+   "skill": "ve-regulatory",
+   "variant_key": "16:53767042:T:C",
+   "score": 0.0075,
+   "direction": "no meaningful change",
+   "confidence": "medium",
+   "in_domain": true,
+   "abstain_reason": null,
+   "evidence": {
+    "confirmed_model": "ENCSR540BML",
+    "fold": 0,
+    "count_pearson_fold0": 0.8291717767715454,
+    "model_selection": "accession supplied by the caller; ve-regulatory cannot verify that a --propose shortlist was produced or reviewed by a human",
+    "window": "16:53765985-53768098 (hg38)",
+    "predicted_accessibility": {
+     "ref_log_count": 4.2933,
+     "alt_log_count": 4.3008
+    },
+    "magnitude_uncalibrated": {
+     "delta_log_count": 0.0075,
+     "fold_change_approx": 1.008
+    },
+    "contribution_delta": {
+     "ref_attribution_at_variant": -0.0117,
+     "alt_attribution_at_variant": -0.00419,
+     "delta": 0.00751,
+     "window_bp": 51
+    },
+    "tf_binding_high_attribution_motif_like_position": true,
+    "notes": [
+     "predicted_accessibility is CATv1's own model output: a continuous score, not a called ATAC/DNase peak; ENCODE peak BEDs were not consulted.",
+     "magnitude_uncalibrated is UNCALIBRATED: a published evaluation of this model class found predicted fold-changes fall roughly an order of magnitude below measured ones (rs12740374/SORT1: ~12-fold measured). Treat only direction as informative.",
+     "contribution_delta is native tangermeme.saturation_mutagenesis attribution on the log-count head -- the one number here with no interpretive layer added.",
+     "tf_binding flags a high-attribution, motif-like position only. CATv1 gives no TF identity; no transcription factor is ever named."
+    ],
+    "flags": []
+   }
+  },
+  {
+   "skill": "ve-regulatory",
+   "variant_key": "8:127401060:G:T",
+   "score": 0.0044,
+   "direction": "no meaningful change",
+   "confidence": "high",
+   "in_domain": true,
+   "abstain_reason": null,
+   "evidence": {
+    "confirmed_model": "ENCSR994KTY",
+    "fold": 0,
+    "count_pearson_fold0": 0.9206854701042175,
+    "model_selection": "accession supplied by the caller; ve-regulatory cannot verify that a --propose shortlist was produced or reviewed by a human",
+    "window": "8:127400003-127402116 (hg38)",
+    "predicted_accessibility": {
+     "ref_log_count": 5.2337,
+     "alt_log_count": 5.2381
+    },
+    "magnitude_uncalibrated": {
+     "delta_log_count": 0.0044,
+     "fold_change_approx": 1.004
+    },
+    "contribution_delta": {
+     "ref_attribution_at_variant": 0.00957,
+     "alt_attribution_at_variant": 0.01398,
+     "delta": 0.00442,
+     "window_bp": 51
+    },
+    "tf_binding_high_attribution_motif_like_position": false,
+    "notes": [
+     "predicted_accessibility is CATv1's own model output: a continuous score, not a called ATAC/DNase peak; ENCODE peak BEDs were not consulted.",
+     "magnitude_uncalibrated is UNCALIBRATED: a published evaluation of this model class found predicted fold-changes fall roughly an order of magnitude below measured ones (rs12740374/SORT1: ~12-fold measured). Treat only direction as informative.",
+     "contribution_delta is native tangermeme.saturation_mutagenesis attribution on the log-count head -- the one number here with no interpretive layer added.",
+     "tf_binding flags a high-attribution, motif-like position only. CATv1 gives no TF identity; no transcription factor is ever named."
+    ],
+    "flags": []
+   }
+  },
+  {
+   "skill": "ve-regulatory",
+   "variant_key": "2:135851076:G:A",
+   "score": 0.1335,
+   "direction": "increases",
+   "confidence": "medium",
+   "in_domain": true,
+   "abstain_reason": null,
+   "evidence": {
+    "confirmed_model": "ENCSR133KBX",
+    "fold": 0,
+    "count_pearson_fold0": 0.7975072264671326,
+    "model_selection": "accession supplied by the caller; ve-regulatory cannot verify that a --propose shortlist was produced or reviewed by a human",
+    "window": "2:135850019-135852132 (hg38)",
+    "predicted_accessibility": {
+     "ref_log_count": 3.7386,
+     "alt_log_count": 3.8721
+    },
+    "magnitude_uncalibrated": {
+     "delta_log_count": 0.1335,
+     "fold_change_approx": 1.146
+    },
+    "contribution_delta": {
+     "ref_attribution_at_variant": -0.07979,
+     "alt_attribution_at_variant": 0.05372,
+     "delta": 0.13351,
+     "window_bp": 51
+    },
+    "tf_binding_high_attribution_motif_like_position": false,
+    "notes": [
+     "predicted_accessibility is CATv1's own model output: a continuous score, not a called ATAC/DNase peak; ENCODE peak BEDs were not consulted.",
+     "magnitude_uncalibrated is UNCALIBRATED: a published evaluation of this model class found predicted fold-changes fall roughly an order of magnitude below measured ones (rs12740374/SORT1: ~12-fold measured). Treat only direction as informative.",
+     "contribution_delta is native tangermeme.saturation_mutagenesis attribution on the log-count head -- the one number here with no interpretive layer added.",
+     "tf_binding flags a high-attribution, motif-like position only. CATv1 gives no TF identity; no transcription factor is ever named."
+    ],
+    "flags": []
+   }
+  }
+ ]
+}

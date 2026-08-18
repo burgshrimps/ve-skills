@@ -1,0 +1,110 @@
+<style>
+  :root{
+    --moss:#1C453E; --euc:#85FFC4;
+    --ink:#1F1D1A; --ink-2:#5A544C; --ink-faint:#8A8278;
+    --surface:#F8F7F4; --white:#FFFFFF; --border-faint:#E8E4DC;
+    --font-demi:"NDKernDemi","Inter",system-ui,sans-serif;
+    --font-body:"NDKernRegular","Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--white); color:var(--ink);
+    font:16px/1.5 var(--font-body); -webkit-font-smoothing:antialiased;
+    font-feature-settings:"cv11","ss01";
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:clamp(1.5rem,4vw,3rem) clamp(1rem,3vw,2rem)}
+  header{display:flex; flex-direction:column; gap:.45rem; margin-bottom:1.75rem}
+  .kicker{font:400 .7rem/1 var(--font-body); letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint)}
+  h1{font:400 28px/1.15 var(--font-demi); letter-spacing:-.01em; margin:0}
+  .sub{margin:0; color:var(--ink-2); max-width:66ch; font-size:.95rem}
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1px;
+         background:var(--border-faint); border:1px solid var(--border-faint); margin-bottom:2rem}
+  .stat{background:var(--surface); padding:1rem 1.15rem}
+  .stat .lab{font:400 11px var(--font-body); letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 .4rem}
+  .stat .val{font:400 24px/1 var(--font-demi); color:var(--ink); margin:0}
+  .stat .val.accent{color:var(--moss)}
+  .figure{overflow-x:auto}
+  svg{display:block; width:100%; height:auto; min-width:760px}
+  .nm{font:400 14px var(--font-demi); fill:var(--ink)}
+  .ds{font:400 11.5px var(--font-body); fill:var(--ink-2)}
+  .io{font:400 11px var(--font-body); fill:var(--ink-faint); letter-spacing:.1em; text-transform:uppercase}
+  .tick{font:400 11px var(--font-body); fill:var(--ink-faint)}
+  .axis{stroke:#BBB5AA; stroke-width:1.3}
+  .gridline{stroke:var(--border-faint); stroke-width:1}
+  .legend{display:flex; flex-wrap:wrap; gap:1.5rem; margin:.25rem 0 1.25rem; font-size:.85rem; color:var(--ink-2)}
+  .legend span{display:flex; align-items:center; gap:.5rem}
+  .sw{width:11px; height:11px; border-radius:2px; display:inline-block}
+  .note{margin:1.75rem 0 0; padding-top:1.25rem; border-top:1px solid var(--border-faint);
+        color:var(--ink-2); font-size:.9rem; max-width:74ch}
+  .note strong{font-family:var(--font-demi); font-weight:400; color:var(--ink)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.85em;
+       background:var(--surface); padding:.1em .35em; border:1px solid var(--border-faint)}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="kicker">ClawBio Berlin · Challenge 1 · ve-regulatory</span>
+    <h1>One variant the model had to get right</h1>
+    <p class="sub">
+      rs12740374 sits in a hepatic enhancer upstream of SORT1. The minor T allele is known
+      to create a C/EBP binding site and raise SORT1 expression. The model saw only sequence.
+    </p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><p class="lab">Model direction</p><p class="val accent">increases</p></div>
+    <div class="stat"><p class="lab">Published direction</p><p class="val accent">increases</p></div>
+    <div class="stat"><p class="lab">Attribution delta</p><p class="val">+0.75</p></div>
+    <div class="stat"><p class="lab">Model confidence</p><p class="val">high</p></div>
+  </div>
+
+  <div class="legend">
+    <span><i class="sw" style="background:#BBB5AA"></i>reference allele — argues against accessibility</span>
+    <span><i class="sw" style="background:#1C453E"></i>alternate allele — argues for accessibility</span>
+  </div>
+
+  <div class="figure">
+  <svg viewBox="40 0 960 250" role="img" aria-label="Diverging bar chart of per-base attribution at rs12740374. The reference G allele scores minus 0.227, arguing against accessibility. The alternate T allele scores plus 0.526, arguing for it.">
+
+    <line class="gridline" x1="120" y1="46" x2="120" y2="196"/>
+    <line class="gridline" x1="310" y1="46" x2="310" y2="196"/>
+    <line class="gridline" x1="690" y1="46" x2="690" y2="196"/>
+    <line class="gridline" x1="880" y1="46" x2="880" y2="196"/>
+    <line class="axis" x1="500" y1="42" x2="500" y2="200"/>
+
+    <text class="io" x="120" y="34">attribution at the variant base</text>
+
+    <text class="nm" x="104" y="95" text-anchor="end">ref  G</text>
+    <rect x="392.2" y="76" width="107.8" height="28" rx="3" fill="#BBB5AA"/>
+    <text class="ds" x="382" y="95" text-anchor="end">−0.227</text>
+
+    <text class="nm" x="104" y="163" text-anchor="end">alt  T</text>
+    <rect x="500" y="144" width="249.9" height="28" rx="3" fill="#1C453E"/>
+    <text class="ds" x="760" y="163">+0.526</text>
+
+    <text class="tick" x="120" y="220" text-anchor="middle">−0.8</text>
+    <text class="tick" x="310" y="220" text-anchor="middle">−0.4</text>
+    <text class="tick" x="500" y="220" text-anchor="middle">0</text>
+    <text class="tick" x="690" y="220" text-anchor="middle">0.4</text>
+    <text class="tick" x="880" y="220" text-anchor="middle">0.8</text>
+
+    <text class="io" x="500" y="242" text-anchor="middle">saturation-mutagenesis attribution, log-count head</text>
+  </svg>
+  </div>
+
+  <p class="note">
+    <strong>The sign flips.</strong> At the variant base the reference G argues against
+    accessibility and the alternate T argues for it — not a shift in magnitude but a change
+    in what that base is doing. That is what creating a binding site looks like in
+    attribution space, recovered from sequence alone.
+  </p>
+
+  <p class="note">
+    <strong>What it still refuses to say.</strong> No transcription factor is named — CATv1
+    predicts accessibility, not TF binding, so the skill reports only a high-attribution,
+    motif-like position. Predicted accessibility (log counts 5.898 → 6.651) is a continuous
+    model output, not a called peak; ENCODE peak BEDs were never consulted. And the 2.13×
+    fold change is tagged <code>UNCALIBRATED</code> against a measured effect of roughly 12×.
+    Direction is the claim. Magnitude is not.
+  </p>
+</div>
