@@ -1,9 +1,9 @@
 ---
 name: ve-splice
 description: >-
-  Scores the change in splice-site strength between the reference and alternate
-  allele of an annotated splice-site variant using the MaxEntScan maximum-entropy
-  model, and abstains when no canonical motif can be located.
+  Measures how much a DNA variant weakens or strengthens the splice signal it sits
+  on, by scoring the sequence with and without the variant and reporting the
+  difference, and says so plainly when no splice signal can be found to measure.
 license: MIT
 metadata:
   version: 0.1.0
@@ -73,6 +73,43 @@ changes the strength of an annotated splice site. You always compare two alleles
 never report on a sequence in isolation, and you never say whether splicing actually
 changes in a cell.
 
+## In Plain English
+
+**The biology, briefly.** A gene is not one continuous instruction. It is written in
+chunks, separated by stretches of filler. Before a cell can use a gene it has to cut the
+filler out and stitch the chunks back together. That cutting and stitching is called
+**splicing**, and the cell knows where to cut because each chunk ends and begins with a
+short signal in the DNA — a **splice site**.
+
+If a DNA change damages one of those signals, the cell can cut in the wrong place or
+fail to cut at all. The gene gets assembled wrong. This is one of the ordinary ways a
+gene stops working.
+
+**The problem this solves.** Standard annotation software tells you a variant is "at a
+splice site" and stamps it HIGH impact. Every such variant gets the same stamp. The stamp
+does not tell you whether the signal was strong or weak to begin with, whether your
+variant actually touches the part that matters, or whether there is a real signal there
+at all. In our test data, twelve different variants all carried that identical HIGH stamp,
+and nothing downstream could tell them apart.
+
+**What this skill does.** It reads the real DNA at each site twice — once as it normally
+reads, once with the variant put in — and measures how much weaker or stronger the
+splicing signal became. You get a number for before, a number for after, and the change
+between them, instead of a label. Those twelve identically-stamped variants separate into
+seven where the signal was substantially weakened, one where it was strengthened, three
+where it barely moved, and one where no splicing signal could be found at all.
+
+So the practical answer it gives you is: *of the variants my annotation tool flagged as
+splice-site variants, which ones actually look like they damage the signal, and by how
+much?*
+
+**What it will not tell you.** Whether splicing really goes wrong in a person. Answering
+that needs RNA measured from a sample, and this data has none — so what you are getting
+is a prediction about the DNA signal, not an observation of the outcome. It also says
+nothing about whether a variant causes disease. And when it cannot find a splice signal
+at all, it tells you that and scores nothing, rather than producing a number that looks
+meaningful but is not.
+
 ## Trigger
 
 Fire this skill when the user says any of: *splice*, *splice site*, *splice-site
@@ -97,8 +134,8 @@ touches the motif, or whether a canonical motif exists at all.
 
 **With it:** each record gets a measured before/after in bits, the strand and site the
 measurement was made against, and — where no motif can be located — an explicit
-abstention instead of a number. On the 12 challenge records the HIGH tier resolves into
-6 substantial changes, 3 negligible ones, 2 borderline, and 1 abstention.
+abstention instead of a number. On the 12 challenge records the single HIGH tier resolves
+into 7 weakened sites, 1 strengthened, 3 with negligible change, and 1 abstention.
 
 **Why ClawBio:** the existing `gi-splice` detects splice sites *in a sequence*. It never
 compares alleles, so it cannot answer "what did this variant change?". `ve-splice` is a
