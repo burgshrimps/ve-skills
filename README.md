@@ -54,6 +54,82 @@ allow.
 
 ---
 
+## Two traps, measured
+
+The pipeline's claim is that it knows what it doesn't know. Here is what that buys you,
+on this data, in two skills. Full slides: [`docs/ve-frequency-slide.html`](docs/ve-frequency-slide.html)
+· [`docs/ve-splice-slide.html`](docs/ve-splice-slide.html)
+
+### `ve-frequency` — the AF in the file is not a population frequency
+
+The VCF offers exactly one frequency field, and it is a trap:
+
+```
+AC=2;AF=0.250;AN=8;MLEAC=2;MLEAF=0.250;DP=120;EFF=…;VQSLOD=4.11
+     ^^^^^^^^
+      GATK cohort AF — two of the eight alleles in THIS FAMILY.
+      Not 25% of humans.
+
+population keys present:  AF_TGP  AF_EXAC  AF_ESP  gnomAD_AF
+                          ── zero occurrences, all 68 records ──
+```
+
+Four diploid samples means `AN = 8`, so the smallest non-zero AF the file can physically
+contain is `1/8`. **12.5% is the floor.** Every rarity threshold in use sits below it:
+
+| Threshold | Purpose | vs. the file's floor |
+|---|---|---|
+| 0.1% | strict dominant | 125× below |
+| 1% | standard rare-disease cut | 12.5× below |
+| 5% | ACMG BA1 stand-alone benign | 2.5× below |
+| **12.5%** | **the file's own minimum** | — |
+
+So reading `INFO/AF` as population frequency scores **all 68 variants as common** —
+including all 68 that segregate with the disease. The filter doesn't merely fail, it
+**inverts**: the more relatives carry a variant, the more common it looks, and the faster
+it is discarded.
+
+| | |
+|---|---|
+| Naive AF filter | **68 / 68 discarded** as common. Silently — no error, an empty shortlist that looks like a clean result. |
+| `ve-frequency` | **68 → `NO_DATA`**, each with a named reason: *cohort AF, not population AF*. The abstention travels downstream as data. |
+
+Build is read from `##reference` and contig lengths, never assumed — our data is b37 and
+gnomAD v4 is GRCh38-only. Absence at a covered site is bounded by `~3/AN`; absence at an
+uncovered site is `NO_DATA`, never rare.
+
+### `ve-splice` — one HIGH label, actually measured
+
+SnpEff stamps all twelve splice-site variants `HIGH`. Nothing downstream can rank them,
+because the label carries no magnitude. `ve-splice` measures the ref-vs-alt change in
+splice-site strength:
+
+```
+POLR3C  NM_006468.6  exon 5 donor   1:145606274 C>T   GRCh37   paternal
+        (gene reads on the − strand, inferred from sequence — so the VCF's C>T
+         is a G>A in gene orientation, on the first base of the donor GT)
+
+  REF   GAG | GTAATG      8.73 bits
+  ALT   GAG | ATAATG      0.55 bits
+              ^
+              canonical GT → AT: the cell's cut signal is gone
+
+  Δ  −8.18 bits — a 94% drop
+```
+
+Twelve identical `HIGH` labels become **7 weakened · 1 strengthened · 3 negligible ·
+1 abstained** — a ranking where there was none.
+
+MaxEntScan (Yeo & Burge 2004), our own port, reproduces all six published reference values
+exactly. Strand inferred from sequence for all 11 scorable loci, **correct 11/11** against
+Ensembl including five minus-strand genes. SpliceAI scores this variant 0.99 and agrees on
+9/11 — run offline as ground truth only, since its licence forbids shipping it.
+
+This is a change in **motif strength**, not an observation of splicing. There is no RNA in
+this data to test it against.
+
+---
+
 ## Why this doesn't overlap with ClawBio's 98 skills
 
 Everything predictive already in ClawBio — `gi-splice`, `gi-chromatin`, `gi-enhancer`,
