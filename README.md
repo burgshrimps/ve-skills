@@ -83,6 +83,9 @@ contain is `1/8`. **12.5% is the floor.** Every rarity threshold in use sits bel
 | 5% | ACMG BA1 stand-alone benign | 2.5× below |
 | **12.5%** | **the file's own minimum** | — |
 
+![Every allele frequency this file can contain sits above every rarity threshold](docs/frequency-floor.svg)
+
+
 So reading `INFO/AF` as population frequency scores **all 68 variants as common** —
 including all 68 that segregate with the disease. The filter doesn't merely fail, it
 **inverts**: the more relatives carry a variant, the more common it looks, and the faster
@@ -118,6 +121,13 @@ POLR3C  NM_006468.6  exon 5 donor   1:145606274 C>T   GRCh37   paternal
 
 Twelve identical `HIGH` labels become **7 weakened · 1 strengthened · 3 negligible ·
 1 abstained** — a ranking where there was none.
+
+![MaxEntScan delta for each splice variant, ranging from -8.75 to +5.23 bits](docs/splice-delta.svg)
+
+Every row carries the same `HIGH` stamp on the left. The measured delta on the right spans
+14 bits. Shown on the bundled demo set (13 records, two of which the skill declines to score);
+the challenge pack's twelve behave the same way.
+
 
 MaxEntScan (Yeo & Burge 2004), our own port, reproduces all six published reference values
 exactly. Strand inferred from sequence for all 11 scorable loci, **correct 11/11** against

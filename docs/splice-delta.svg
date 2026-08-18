@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 477" width="760" height="477" role="img" aria-label="SnpEff labels all thirteen variants HIGH. MaxEntScan measures a change in splice-site strength ranging from minus 8.75 bits to plus 5.23 bits, plus two abstentions, turning one label into a ranking.">
+<rect width="760" height="477" fill="#FFFFFF"/>
+<g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif">
+<text x="40" y="26" font-size="14" font-weight="600" fill="#1F1D1A">One HIGH label, actually measured</text>
+<text x="40" y="44" font-size="10.5" fill="#8A8278">MaxEntScan Δ in splice-site strength, ref → alt. Negative = the motif is weaker.</text>
+<text x="40" y="78" font-size="9.5" font-weight="600" fill="#8A8278" letter-spacing="0.08em">SNPEFF</text>
+<text x="104" y="78" font-size="9.5" font-weight="600" fill="#8A8278" letter-spacing="0.08em">GENE</text>
+<text x="250" y="66" font-size="9.5" font-weight="600" fill="#8A8278" letter-spacing="0.08em">Δ BITS (MaxEntScan)</text>
+<line x1="250.0" y1="88" x2="250.0" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="250.0" y="84" text-anchor="middle" font-size="9" fill="#8A8278">-10</text>
+<line x1="301.2" y1="88" x2="301.2" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="301.2" y="84" text-anchor="middle" font-size="9" fill="#8A8278">-8</text>
+<line x1="352.5" y1="88" x2="352.5" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="352.5" y="84" text-anchor="middle" font-size="9" fill="#8A8278">-6</text>
+<line x1="403.8" y1="88" x2="403.8" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="403.8" y="84" text-anchor="middle" font-size="9" fill="#8A8278">-4</text>
+<line x1="455.0" y1="88" x2="455.0" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="455.0" y="84" text-anchor="middle" font-size="9" fill="#8A8278">-2</text>
+<line x1="506.2" y1="88" x2="506.2" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="506.2" y="84" text-anchor="middle" font-size="9" fill="#8A8278">0</text>
+<line x1="557.5" y1="88" x2="557.5" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="557.5" y="84" text-anchor="middle" font-size="9" fill="#8A8278">2</text>
+<line x1="608.8" y1="88" x2="608.8" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="608.8" y="84" text-anchor="middle" font-size="9" fill="#8A8278">4</text>
+<line x1="660.0" y1="88" x2="660.0" y2="351" stroke="#DCD8D0" stroke-width="1"/>
+<text x="660.0" y="84" text-anchor="middle" font-size="9" fill="#8A8278">6</text>
+<line x1="506.2" y1="88" x2="506.2" y2="351" stroke="#BBB5AA" stroke-width="1.5"/>
+<text x="40" y="108" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="108" font-size="11" fill="#1F1D1A">TEX26</text>
+<line x1="506.2" y1="104" x2="282.0" y2="104" stroke="#d03b3b" stroke-width="2"/>
+<circle cx="282.0" cy="104" r="4.5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="272.0" y="108" text-anchor="end" font-size="10" fill="#5A544C">-8.75</text>
+<text x="40" y="131" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="131" font-size="11" fill="#1F1D1A">POLR3C</text>
+<line x1="506.2" y1="127" x2="296.6" y2="127" stroke="#d03b3b" stroke-width="2"/>
+<circle cx="296.6" cy="127" r="4.5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="286.6" y="131" text-anchor="end" font-size="10" fill="#5A544C">-8.18</text>
+<text x="518.2" y="131" font-size="9.5" fill="#d03b3b">canonical GT → AT — 94% of the motif lost</text>
+<text x="40" y="154" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="154" font-size="11" fill="#1F1D1A">ENPP1</text>
+<line x1="506.2" y1="150" x2="296.6" y2="150" stroke="#d03b3b" stroke-width="2"/>
+<circle cx="296.6" cy="150" r="4.5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="286.6" y="154" text-anchor="end" font-size="10" fill="#5A544C">-8.18</text>
+<text x="40" y="177" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="177" font-size="11" fill="#1F1D1A">TMEM216</text>
+<line x1="506.2" y1="173" x2="299.6" y2="173" stroke="#d03b3b" stroke-width="2"/>
+<circle cx="299.6" cy="173" r="4.5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="289.6" y="177" text-anchor="end" font-size="10" fill="#5A544C">-8.06</text>
+<text x="40" y="200" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="200" font-size="11" fill="#1F1D1A">TMEM216</text>
+<line x1="506.2" y1="196" x2="307.9" y2="196" stroke="#d03b3b" stroke-width="2"/>
+<circle cx="307.9" cy="196" r="4.5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="297.9" y="200" text-anchor="end" font-size="10" fill="#5A544C">-7.74</text>
+<text x="40" y="223" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="223" font-size="11" fill="#1F1D1A">HSD17B13</text>
+<line x1="506.2" y1="219" x2="318.7" y2="219" stroke="#d03b3b" stroke-width="2"/>
+<circle cx="318.7" cy="219" r="4.5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="308.7" y="223" text-anchor="end" font-size="10" fill="#5A544C">-7.32</text>
+<text x="40" y="246" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="246" font-size="11" fill="#1F1D1A">BAGE2</text>
+<line x1="506.2" y1="242" x2="331.4" y2="242" stroke="#d03b3b" stroke-width="2"/>
+<circle cx="331.4" cy="242" r="4.5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="321.4" y="246" text-anchor="end" font-size="10" fill="#5A544C">-6.82</text>
+<text x="40" y="269" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="269" font-size="11" fill="#1F1D1A">PYGL</text>
+<line x1="506.2" y1="265" x2="462.2" y2="265" stroke="#8A8278" stroke-width="2"/>
+<circle cx="462.2" cy="265" r="4.5" fill="#8A8278" stroke="#FFFFFF" stroke-width="2"/>
+<text x="452.2" y="269" text-anchor="end" font-size="10" fill="#5A544C">-1.72</text>
+<text x="40" y="292" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="292" font-size="11" fill="#1F1D1A">CCDC103</text>
+<line x1="506.2" y1="288" x2="466.7" y2="288" stroke="#8A8278" stroke-width="2"/>
+<circle cx="466.7" cy="288" r="4.5" fill="#8A8278" stroke="#FFFFFF" stroke-width="2"/>
+<text x="456.7" y="292" text-anchor="end" font-size="10" fill="#5A544C">-1.54</text>
+<text x="40" y="315" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="315" font-size="11" fill="#1F1D1A">RHBG</text>
+<line x1="506.2" y1="311" x2="491.9" y2="311" stroke="#8A8278" stroke-width="2"/>
+<circle cx="491.9" cy="311" r="4.5" fill="#8A8278" stroke="#FFFFFF" stroke-width="2"/>
+<text x="481.9" y="315" text-anchor="end" font-size="10" fill="#5A544C">-0.56</text>
+<text x="40" y="338" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="338" font-size="11" fill="#1F1D1A">SLC3A1</text>
+<line x1="506.2" y1="334" x2="640.4" y2="334" stroke="#2b6ca3" stroke-width="2"/>
+<circle cx="640.4" cy="334" r="4.5" fill="#2b6ca3" stroke="#FFFFFF" stroke-width="2"/>
+<text x="650.4" y="338" text-anchor="start" font-size="10" fill="#5A544C">+5.23</text>
+<line x1="40" y1="349" x2="660" y2="349" stroke="#DCD8D0" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="40" y="364" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="364" font-size="11" fill="#8A8278">19:6897464:C:G</text>
+<circle cx="234.0" cy="360" r="4.5" fill="#FFFFFF" stroke="#8A8278" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="250" y="364" font-size="10" fill="#8A8278">abstained — no reference GT donor within 20 nt — nothing to measure a delta against</text>
+<text x="40" y="387" font-size="9.5" font-weight="600" fill="#8A8278">HIGH</text>
+<text x="104" y="387" font-size="11" fill="#8A8278">1:11906068:A:G</text>
+<circle cx="234.0" cy="383" r="4.5" fill="#FFFFFF" stroke="#8A8278" stroke-width="1.5" stroke-dasharray="2 2"/>
+<text x="250" y="387" font-size="10" fill="#8A8278">abstained — routed protein_truncating — outside this skill's domain</text>
+<line x1="40" y1="411" x2="660" y2="411" stroke="#DCD8D0" stroke-width="1"/>
+<text x="40" y="431" font-size="11" fill="#5A544C"><tspan font-weight="600" fill="#d03b3b">7 weakened</tspan>  ·  <tspan font-weight="600" fill="#2b6ca3">1 strengthened</tspan>  ·  <tspan font-weight="600" fill="#8A8278">3 negligible</tspan>  ·  2 abstained — a ranking where the label gave none.</text>
+</g></svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 292" width="760" height="292" role="img" aria-label="Log-scale allele-frequency axis. The three rarity thresholds in common use (0.1%, 1%, 5%) all sit below 12.5%, which is the smallest non-zero allele frequency a four-sample VCF can contain, so all eight possible values are classed as common.">
+<rect width="760" height="292" fill="#FFFFFF"/>
+<g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif">
+<text x="74" y="26" font-size="14" font-weight="600" fill="#1F1D1A">INFO/AF cannot be rare</text>
+<text x="74" y="44" font-size="10.5" fill="#8A8278">4 diploid samples → AN = 8 → the smallest non-zero AF the file can contain is 1/8</text>
+<text x="74" y="60" font-size="10" fill="#8A8278">dashed: rarity thresholds in use — 0.1% strict dominant · 1% standard rare-disease cut · 5% ACMG BA1</text>
+<rect x="591.2" y="68" width="150.8" height="128.0" fill="#f7e4e2"/>
+<text x="577.2" y="86" text-anchor="end" font-size="11" font-weight="600" fill="#d03b3b">the only values INFO/AF can take  →</text>
+<text x="577.2" y="101" text-anchor="end" font-size="10" fill="#5A544C">every one classed COMMON → discarded</text>
+<line x1="74" y1="196" x2="742" y2="196" stroke="#BBB5AA" stroke-width="1"/>
+<line x1="74.0" y1="196" x2="74.0" y2="201" stroke="#BBB5AA" stroke-width="1"/>
+<text x="74.0" y="215" text-anchor="middle" font-size="10" fill="#8A8278">0.01%</text>
+<line x1="241.0" y1="196" x2="241.0" y2="201" stroke="#BBB5AA" stroke-width="1"/>
+<text x="241.0" y="215" text-anchor="middle" font-size="10" fill="#8A8278">0.1%</text>
+<line x1="408.0" y1="196" x2="408.0" y2="201" stroke="#BBB5AA" stroke-width="1"/>
+<text x="408.0" y="215" text-anchor="middle" font-size="10" fill="#8A8278">1%</text>
+<line x1="575.0" y1="196" x2="575.0" y2="201" stroke="#BBB5AA" stroke-width="1"/>
+<text x="575.0" y="215" text-anchor="middle" font-size="10" fill="#8A8278">10%</text>
+<line x1="742.0" y1="196" x2="742.0" y2="201" stroke="#BBB5AA" stroke-width="1"/>
+<text x="742.0" y="215" text-anchor="middle" font-size="10" fill="#8A8278">100%</text>
+<text x="408.0" y="234" text-anchor="middle" font-size="10.5" fill="#5A544C">population allele frequency (log scale)</text>
+<line x1="241.0" y1="100" x2="241.0" y2="196" stroke="#BBB5AA" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="241.0" y="188" text-anchor="middle" font-size="10" font-weight="600" fill="#5A544C">0.1%</text>
+<line x1="408.0" y1="100" x2="408.0" y2="196" stroke="#BBB5AA" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="408.0" y="188" text-anchor="middle" font-size="10" font-weight="600" fill="#5A544C">1%</text>
+<line x1="524.7" y1="100" x2="524.7" y2="196" stroke="#BBB5AA" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="524.7" y="188" text-anchor="middle" font-size="10" font-weight="600" fill="#5A544C">5%</text>
+<circle cx="591.2" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="641.5" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="670.9" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="691.7" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="707.9" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="721.1" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="732.3" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<circle cx="742.0" cy="196" r="5" fill="#d03b3b" stroke="#FFFFFF" stroke-width="2"/>
+<text x="591.2" y="166" text-anchor="middle" font-size="12" font-weight="700" fill="#d03b3b">12.5%</text>
+<text x="591.2" y="180" text-anchor="middle" font-size="9.5" fill="#d03b3b">floor = 1/8</text>
+<text x="742.0" y="180" text-anchor="middle" font-size="9.5" fill="#8A8278">8/8</text>
+<line x1="74" y1="252" x2="742" y2="252" stroke="#DCD8D0" stroke-width="1"/>
+<text x="74" y="270" font-size="11" fill="#5A544C">Read INFO/AF as population frequency and all 68 records score as common — including all 68 that segregate.</text>
+<text x="74" y="284" font-size="11" fill="#5A544C">ve-frequency returns <tspan font-weight="600" fill="#1F1D1A">NO_DATA</tspan> instead: cohort AF, not population AF.</text>
+</g></svg>
