@@ -128,6 +128,20 @@ Ensembl including five minus-strand genes. SpliceAI scores this variant 0.99 and
 This is a change in **motif strength**, not an observation of splicing. There is no RNA in
 this data to test it against.
 
+### What these two skills run on
+
+No hosted API is required at demo time. Both run offline from vendored data.
+
+| Tool / resource | Used by | What it does |
+|---|---|---|
+| **MaxEntScan** (Yeo & Burge 2004) | `ve-splice` | Maximum-entropy model scoring how strongly a 9-mer donor or 23-mer acceptor window looks like a real splice site, in bits. Our own port; score matrices vendored from [maxentpy](https://github.com/kepbod/maxentpy) (MIT). |
+| **Indexed FASTA** (`.fa` + `.fai`) | `ve-splice` | Reference sequence for the ref-vs-alt windows, read by random access with the standard library — no `pysam`. `--demo` uses pre-extracted windows, so it needs neither FASTA nor network. |
+| **SpliceAI** | `ve-splice` | Deep-learning splice predictor, run **offline as ground truth only** to check our scores (9/11 agree). Its licence forbids shipping it, so it is not a runtime dependency. |
+| **Ensembl** | `ve-splice`, `ve-frequency` | Gene strand and transcript coordinates for validation (strand correct 11/11); and the source of the GRCh37→GRCh38 mapping below. |
+| **Ensembl liftover chain** (285 KB, vendored) | `ve-frequency` | Coordinate translation b37 → GRCh38, since gnomAD v4 is GRCh38-only. Read by a stdlib chain parser — no `pyliftover`, `CrossMap` or `bcftools`. Validated 4/4 against Ensembl REST and gnomAD's own liftover. |
+| **gnomAD v4** | `ve-frequency` | The population-frequency reference the lifted coordinates point at, and the source of the `AF_*` / `gnomAD_AF` key names the gate looks for. Live lookup is supported; the demo runs fully offline. |
+| **VCF header** (`##reference`, `##contig`) | `ve-frequency` | Where the reference build is read from, rather than assumed. Conflicting or absent → `NO_DATA`. |
+
 ---
 
 ## Why this doesn't overlap with ClawBio's 98 skills
