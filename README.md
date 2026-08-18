@@ -51,8 +51,6 @@ outside demo sets ────────┤
 | [`ve-splice`](skills/ve-splice) | Ref-vs-alt change in splice-site strength (MaxEntScan). |
 | [`ve-regulatory`](skills/ve-regulatory) | Ref-vs-alt change in predicted chromatin accessibility (Cherimoya / CATv1). |
 
-`ve-lof`, `ve-missense` and `ve-merge` are not built.
-
 ---
 
 ## What the skills measure
