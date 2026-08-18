@@ -194,7 +194,7 @@ def _try_vep_rest(chrom: str, pos: str, ref: str, alt: str, build: str | None):
     end = int(pos) + max(len(ref) - 1, 0)
     url = f"{host}/vep/human/region/{chrom}:{pos}-{end}/{alt}?content-type=application/json"
     try:
-        with urllib.request.urlopen(url, timeout=5) as resp:
+        with urllib.request.urlopen(url, timeout=15) as resp:
             payload = json.loads(resp.read().decode("utf-8"))
     except (urllib.error.URLError, OSError, ValueError, TimeoutError):
         return None, "vep_rest"
