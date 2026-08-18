@@ -1,0 +1,12 @@
+##fileformat=VCFv4.2
+##reference=GRCh38
+##source=Curated ClinVar/dbSNP variants, coordinates and consequences verified via Ensembl VEP REST (GRCh38)
+##note=Deliberately carries NO EFF/ANN annotation, so ve-router must annotate it itself
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	DEMO01
+1	109274968	rs12740374	G	T	.	PASS	.	GT	0/1
+2	135851076	rs4988235	G	A	.	PASS	.	GT	0/1
+6	26092913	rs1800562	G	A	.	PASS	.	GT	0/1
+7	117531115	rs78756941	G	T	.	PASS	.	GT	0/1
+7	117587806	rs75527207	G	A	.	PASS	.	GT	0/1
+7	117642566	rs77010898	G	A	.	PASS	.	GT	0/1

@@ -14,6 +14,11 @@ No hosted-API dependency, nothing to break in the demo.
 
 ## The pipeline
 
+![ve-skills workflow](docs/workflow.svg)
+
+<details>
+<summary>Same thing as text</summary>
+
 ```
 challenge1 VCF (68, b37) ─┐
 outside demo sets ────────┤
@@ -40,6 +45,8 @@ outside demo sets ────────┤
                  └──────┬───────┘
               ranked list + abstention list
 ```
+
+</details>
 
 Record counts are what the **challenge pack actually produces**. The two zero-count
 branches are demoed on outside public data (ClinVar, gnomAD), which the challenge rules
@@ -102,9 +109,23 @@ Built up by `ve-segregation` → `ve-frequency` → `ve-router`, consumed by eve
     "class": "NO_DATA",
     "provenance_warning": "INFO/AF present but is GATK cohort AF over 4 samples, not population AF"
   },
-  "class": "protein_truncating"
+  "class": "protein_truncating",
+  "routing": {
+    "annotation_source": "EFF",
+    "build": "GRCh37",
+    "selection_rule": "Highest annotation impact tier wins (HIGH > MODERATE > LOW > MODIFIER); ties broken by order in the EFF/ANN field. The Effect name decides the class - FunctionalClass is never used for routing.",
+    "selected":  { "effect": "STOP_LOST", "gene": "NPPA", "transcript": "NM_006172.3",
+                   "impact": "HIGH", "functional_class": "MISSENSE" },
+    "discarded": [ { "effect": "DOWNSTREAM", "gene": "CLCN6", "transcript": "NM_001256959.1",
+                     "impact": "MODIFIER", "functional_class": null } ]
+  }
 }
 ```
+
+`routing` is written by `ve-router` and is the audit trail for the `class` decision:
+which annotation won, under what rule, from what source and build, and every alternative
+that was discarded. Branch skills can ignore it; `ve-merge` uses it to show the working.
+`annotation_source` is one of `EFF` | `ANN` | `snpEff` | `vep_rest`.
 
 - `segregation.pattern` ∈ `paternal` | `maternal` | `ambiguous` | `excluded`
 - `freq.class` ∈ `RARE` | `COMMON` | `NO_DATA`
